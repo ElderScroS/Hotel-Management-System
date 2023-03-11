@@ -1,0 +1,93 @@
+﻿<Page x:Class="Project.RoomPage.SearchRoomPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Project.RoomPage"
+      xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+      mc:Ignorable="d" 
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      
+      Title="Hotel">
+
+    <Grid Background="Black" Opacity="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="38*"/>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="19*"/>
+                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="37*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="11*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="0*"/>
+            </Grid.RowDefinitions>
+
+            <Image Source="/Images/addRoomBackImage.jpg" Grid.RowSpan="7" Opacity="0.7" Grid.ColumnSpan="7" Stretch="Fill" Margin="3,0,0,0"/>
+            <Label Content="Search Room:" Margin="0,20,15,9" FontWeight="Bold" FontSize="22" FontFamily="Cascadia Code SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF032B0B"/>
+
+            <Grid Grid.Row="4" Grid.ColumnSpan="7" Grid.RowSpan="3">
+                <ListView Name="RoomListView" SelectionChanged="RoomListView_SelectionChanged" Margin="0,0,0,115" Foreground="#DDFFFFFF" Background="{x:Null}">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="TypeRoom" DisplayMemberBinding="{Binding attribute_TypeRoom}"/>
+                                <GridViewColumn Header="Active" DisplayMemberBinding="{Binding Active}"/>
+                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+
+            <Label Content="ID:" Foreground="#DDFFFFFF" FontSize="18" FontFamily="Bahnschrift SemiBold SemiCondensed" VerticalContentAlignment="Center" Margin="0,0,136,0" Height="30" VerticalAlignment="Center" Grid.Row="1"/>
+            <TextBox x:Name="IdTextBox"
+                materialDesign:HintAssist.Hint="Digits only" Background="#FFEC8C8C" FontSize="16" Foreground="#DD000000" FontFamily="Bahnschrift Light SemiCondensed" Margin="49,0,0,0" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Width="106" Grid.Row="1">
+                <TextBox.Text>
+                    <Binding Path="Name"  UpdateSourceTrigger="PropertyChanged">
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Label Content="Type room:" Foreground="#DDFFFFFF" FontFamily="Bahnschrift Condensed" FontSize="18" HorizontalContentAlignment="Center" Margin="187,40,120,34" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
+            <ComboBox Name="TypeRoomComboBox" Margin="5,41,10,39" Background="#FFDE9D9D" Foreground="#DD121769" VerticalAlignment="Stretch" FontSize="16" Grid.RowSpan="2" Grid.Column="2"/>
+
+            <Label Content="Status:" Foreground="#DDFFFFFF" FontSize="20" FontFamily="Bahnschrift SemiBold Condensed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="175,23,108,17" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+            <RadioButton Name="FreeRB" Content="Free" FontSize="16" Background="White" Foreground="White" Margin="5,6,31,0" Grid.Row="1" RenderTransformOrigin="0.476,0.206" Grid.Column="2"/>
+            <RadioButton Name="BusyRB" Content="Busy" FontSize="16" Foreground="White" Margin="5,0,31,0" Grid.Row="2" Grid.Column="2"/>
+
+            <Label Content="Price:" Foreground="#DDFFFFFF" FontSize="20" FontFamily="Bahnschrift SemiBold Condensed" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="65,62,155,22" Grid.RowSpan="3" Grid.ColumnSpan="3" Grid.Column="3"/>
+            <TextBox x:Name="PriceTextBox"
+                materialDesign:HintAssist.Hint="$ in 24 hours" Background="#FFD29696" FontSize="16" FontStyle="Italic" FontFamily="Bahnschrift Light SemiCondensed" Margin="5,5,14,0" Grid.Row="1" Grid.Column="5" Height="35" VerticalAlignment="Top">
+                <TextBox.Text>
+                    <Binding Path="Name"  UpdateSourceTrigger="PropertyChanged">
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <Button Grid.Row="5" Name="DeleteRoomBtn" Content="Delete Room" Click="DeleteRoomBtn_Click" Foreground="#DDE63434" BorderBrush="#FFD60000" Background="#FF100707" FontWeight="Normal" FontFamily="Cascadia Mono SemiBold" FontSize="20" Margin="18,11,85,12" Grid.ColumnSpan="3" Grid.Column="3"/>
+            <Button Name="EditRoomBtn" Content="Edit Room" Click="EditRoomBtn_Click" Foreground="#DD7765FF" BorderBrush="#FF2F00DA" Background="#FF100707" FontWeight="Normal" FontFamily="Cascadia Mono SemiBold" FontSize="20" Margin="139,10,31,12" Grid.Row="5" Grid.ColumnSpan="3"/>
+        </Grid>
+
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Page>
